@@ -1,26 +1,29 @@
 package it.xpug.kata.birthday_greetings
 
-import org.junit.Assert
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
+import kotlin.test.assertNotNull
 
 class EmployeeTest {
+
     @Test
-    @Throws(Exception::class)
     fun testBirthday() {
         val employee = Employee("foo", "bar", "1990/01/31", "a@b.c")
-        Assert.assertFalse("not his birthday", employee.isBirthday(XDate("2008/01/30")))
-        Assert.assertTrue("his birthday", employee.isBirthday(XDate("2008/01/31")))
+        assertFalse("not his birthday", employee.isBirthday(XDate("2008/01/30")))
+        assertTrue("his birthday", employee.isBirthday(XDate("2008/01/31")))
     }
 
     @Test
-    @Throws(Exception::class)
     fun equality() {
         val base = Employee("First", "Last", "1999/09/01", "first@last.com")
         val same = Employee("First", "Last", "1999/09/01", "first@last.com")
         val different = Employee("First", "Last", "1999/09/01", "boom@boom.com")
-        Assert.assertFalse(base.equals(null))
-        Assert.assertFalse(base.equals(""))
-        Assert.assertTrue(base.equals(same))
-        Assert.assertFalse(base.equals(different))
+
+        assertNotNull(base)
+        assertEquals(base, same)
+        assertNotEquals(base, different)
     }
 }
